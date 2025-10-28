@@ -1,0 +1,73 @@
+demo-crud-relations
+├─ pom.xml
+├─ src
+│  ├─ main
+│  │  ├─ java
+│  │  │  └─ com.example.demo
+│  │  │     ├─ DemoApplication.java
+│  │  │     ├─ config
+│  │  │     │  └─ SecurityConfig.java
+│  │  │     ├─ controller
+│  │  │     │  ├─ HomeController.java
+│  │  │     │  ├─ AuthorController.java
+│  │  │     │  ├─ BookController.java
+│  │  │     │  ├─ StudentController.java
+│  │  │     │  ├─ CourseController.java
+│  │  │     │  └─ AuthController.java
+│  │  │     ├─ dto
+│  │  │     │  └─ UserDto.java
+│  │  │     ├─ entity
+│  │  │     │  ├─ Author.java
+│  │  │     │  ├─ Book.java
+│  │  │     │  ├─ Student.java
+│  │  │     │  ├─ Course.java
+│  │  │     │  ├─ AppUser.java
+│  │  │     │  └─ AppRole.java
+│  │  │     ├─ repository
+│  │  │     │  ├─ AuthorRepository.java
+│  │  │     │  ├─ BookRepository.java
+│  │  │     │  ├─ StudentRepository.java
+│  │  │     │  ├─ CourseRepository.java
+│  │  │     │  ├─ AppUserRepository.java
+│  │  │     │  └─ AppRoleRepository.java
+│  │  │     ├─ service
+│  │  │     │  ├─ AuthorService.java
+│  │  │     │  ├─ BookService.java
+│  │  │     │  ├─ StudentService.java
+│  │  │     │  ├─ CourseService.java
+│  │  │     │  └─ JpaUserDetailsService.java
+│  │  │     └─ util
+│  │  │        └─ DataInitializer.java
+│  │  ├─ resources
+│  │  │  ├─ application.yml
+│  │  │  ├─ static
+│  │  │  │  ├─ css
+│  │  │  │  │  └─ custom.css
+│  │  │  │  └─ js
+│  │  │  │     └─ app.js
+│  │  │  └─ templates
+│  │  │     ├─ fragments
+│  │  │     │  ├─ head.html
+│  │  │     │  └─ nav.html
+│  │  │     ├─ index.html
+│  │  │     ├─ login.html
+│  │  │     ├─ authors
+│  │  │     │  ├─ list.html
+│  │  │     │  ├─ form.html
+│  │  │     │  └─ view.html
+│  │  │     ├─ books
+│  │  │     │  ├─ list.html
+│  │  │     │  ├─ form.html
+│  │  │     │  └─ view.html
+│  │  │     ├─ students
+│  │  │     │  ├─ list.html
+│  │  │     │  ├─ form.html
+│  │  │     │  └─ view.html
+│  │  │     └─ courses
+│  │  │        ├─ list.html
+│  │  │        ├─ form.html
+│  │  │        └─ view.html
+│  └─ test
+│     └─ java
+│        └─ com.example.demo
+│           └─ DemoApplicationTests.java
