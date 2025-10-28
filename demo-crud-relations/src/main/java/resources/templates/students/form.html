@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<div class="container">
+    <div th:replace="fragments/nav :: nav"></div>
+    <h2 th:text="${student.id} != null ? 'Edit Student' : 'New Student'"></h2>
+    <form th:action="${student.id} != null ? @{/students/{id}(id=${student.id})} : @{/students}" method="post" th:object="${student}">
+        <div class="mb-3"><label class="form-label">Name</label><input class="form-control" th:field="*{name}" /></div>
+        <div class="mb-3"><label class="form-label">Email</label><input class="form-control" th:field="*{email}" /></div>
+        <div class="mb-3">
+            <label class="form-label">Courses</label>
+            <select multiple class="form-select" name="courseIds">
+                <option th:each="c: ${courses}" th:value="${c.id}" th:text="${c.title}" th:selected="${student.courses.contains(c)}">Course</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+</div>
+</body>
+</html>
