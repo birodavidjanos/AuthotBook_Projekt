@@ -1,0 +1,9 @@
+body {
+  padding-top: 1rem;
+
+  background-image: url("/images/background.jpg"); /* vagy .png, .jpeg, amit használsz */
+  background-size: cover;              /* kitölti a teljes képernyőt */
+  background-position: center center;  /* középre igazítja */
+  background-repeat: no-repeat;        /* nem ismétli */
+  background-attachment: fixed;        /* nem scrollozik vele a tartalom */
+}
