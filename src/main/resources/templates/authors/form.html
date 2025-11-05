@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<div class="container">
+    <div th:replace="fragments/nav :: nav"></div>
+    <h2 th:text="${author.id} != null ? 'Edit Author' : 'New Author'"></h2>
+
+    <form th:action="@{/authors}" th:method="post" th:object="${author}">
+        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input class="form-control" th:field="*{name}" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Bio</label>
+            <textarea class="form-control" th:field="*{bio}"></textarea>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a class="btn btn-secondary ms-2" th:href="@{/authors}">Back</a>
+    </form>
+</div>
+</body>
+</html>
