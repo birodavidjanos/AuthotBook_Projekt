@@ -71,6 +71,78 @@ public class DataInitializer {
             s2.setEmail("jane@example.com");
             s2.addCourse(c1);
             studentRepo.save(s2);
+
+            // további szerzők és könyvek
+            Author a2 = new Author();
+            a2.setName("Bob Writer");
+            a2.setBio("Technical and fiction books");
+            authorRepo.save(a2);
+
+            Book b3 = new Book();
+            b3.setTitle("Effective Java");
+            b3.setIsbn("ISBN-003");
+            b3.setAuthor(a2);
+            bookRepo.save(b3);
+
+            Book b4 = new Book();
+            b4.setTitle("Clean Code");
+            b4.setIsbn("ISBN-004");
+            b4.setAuthor(a2);
+            bookRepo.save(b4);
+
+            Author a3 = new Author();
+            a3.setName("Clara Poet");
+            a3.setBio("Novelist and poet");
+            authorRepo.save(a3);
+
+            Book b5 = new Book();
+            b5.setTitle("Modern Poetry");
+            b5.setIsbn("ISBN-005");
+            b5.setAuthor(a3);
+            bookRepo.save(b5);
+
+// további kurzusok
+            Course c3 = new Course();
+            c3.setTitle("Introduction to Computer Science");
+            c3.setCode("CS101");
+            courseRepo.save(c3);
+
+            Course c4 = new Course();
+            c4.setTitle("English Literature");
+            c4.setCode("ENG101");
+            courseRepo.save(c4);
+
+            Course c5 = new Course();
+            c5.setTitle("World History");
+            c5.setCode("HIST201");
+            courseRepo.save(c5);
+
+// további diákok és beiratkozások
+            Student s3 = new Student();
+            s3.setName("Maria Student");
+            s3.setEmail("maria@example.com");
+            s3.addCourse(c3);
+            s3.addCourse(c1); // ha c1 korábban definiálva van (Mathematics)
+            studentRepo.save(s3);
+
+            Student s4 = new Student();
+            s4.setName("Peter Student");
+            s4.setEmail("peter@example.com");
+            s4.addCourse(c4);
+            s4.addCourse(c5);
+            studentRepo.save(s4);
+
+            Student s5 = new Student();
+            s5.setName("Lucy Student");
+            s5.setEmail("lucy@example.com");
+            s5.addCourse(c2); // Physics
+            s5.addCourse(c3);
+            studentRepo.save(s5);
+
+// opcionális: további egyszerű beiratkozás bővítés
+            s2.addCourse(c3); // Jane is now also in CS101
+            studentRepo.save(s2);
+
         };
     }
 }
