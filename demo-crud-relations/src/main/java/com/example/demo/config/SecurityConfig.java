@@ -25,28 +25,53 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))
-                )
+                .csrf(csrf -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(new AntPathRequestMatcher("/"),
+                        // publikus erőforrások
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/"),
                                 new AntPathRequestMatcher("/css/**"),
                                 new AntPathRequestMatcher("/js/**"),
                                 new AntPathRequestMatcher("/images/**"),
-                                new AntPathRequestMatcher("/h2-console/**"))
-                        .permitAll()
+                                new AntPathRequestMatcher("/h2-console/**")
+                        ).permitAll()
+
+                        // ADMIN-only műveletek (szerkesztés/törlés) - POST/DELETE metodokkal
+                        .requestMatchers(new AntPathRequestMatcher("/books/*/delete", "POST")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/books/*/edit", "POST")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/books/*", "DELETE")).hasRole("ADMIN")
+
+                        .requestMatchers(new AntPathRequestMatcher("/authors/*/delete", "POST")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/authors/*/edit", "POST")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/authors/*", "DELETE")).hasRole("ADMIN")
+
+                        .requestMatchers(new AntPathRequestMatcher("/students/*/delete", "POST")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/students/*/edit", "POST")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/students/*", "DELETE")).hasRole("ADMIN")
+
+                        .requestMatchers(new AntPathRequestMatcher("/courses/*/delete", "POST")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/courses/*/edit", "POST")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/courses/*", "DELETE")).hasRole("ADMIN")
+
+                        // általános hozzáférés bejelentkezetteknek (olvasás, listák stb.)
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/books/**"),
+                                new AntPathRequestMatcher("/authors/**"),
+                                new AntPathRequestMatcher("/students/**"),
+                                new AntPathRequestMatcher("/courses/**")
+                        ).authenticated()
+
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/", true) // mindig ide megy bejelentkezés után
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
                 .logout(logout -> logout.permitAll());
-        // Itt regisztráljuk explicit módon az AuthenticationProvider-t
-        http.authenticationProvider(authenticationProvider());
 
+        http.authenticationProvider(authenticationProvider());
         return http.build();
     }
 
