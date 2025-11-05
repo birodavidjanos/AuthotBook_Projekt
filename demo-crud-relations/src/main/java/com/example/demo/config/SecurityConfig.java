@@ -40,9 +40,12 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .defaultSuccessUrl("/", true) // mindig ide megy bejelentkezés után
                         .permitAll()
                 )
                 .logout(logout -> logout.permitAll());
+        // Itt regisztráljuk explicit módon az AuthenticationProvider-t
+        http.authenticationProvider(authenticationProvider());
 
         return http.build();
     }
